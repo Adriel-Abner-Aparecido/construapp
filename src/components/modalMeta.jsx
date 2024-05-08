@@ -13,6 +13,7 @@ import {
 } from "react-bootstrap";
 import apiUrl from "../config";
 import axios from "axios";
+import { settoken } from "../helpers/token-helper";
 
 const ModalMeta = ({ show, handleClose }) => {
   const [formData, setFormData] = useState({
@@ -24,10 +25,6 @@ const ModalMeta = ({ show, handleClose }) => {
   const handleChange = (event) => {
     setFormData({ ...formData, [event.target.name]: event.target.value });
   };
-
-  const token = localStorage.getItem("token");
-  const tokenPayload = JSON.parse(token);
-  const settoken = tokenPayload?.token;
 
   const handleSubmit = async () => {
     try {
@@ -66,7 +63,7 @@ const ModalMeta = ({ show, handleClose }) => {
       }
     };
     pegaMeta();
-  }, [settoken]);
+  }, []);
 
   return (
     <Modal className="fade" show={show} onHide={handleClose} centered>

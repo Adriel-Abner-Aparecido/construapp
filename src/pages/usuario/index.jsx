@@ -19,15 +19,12 @@ import ProgressUsuarios from "../../components/progressUsuarios";
 import FormDescontos from "../../components/formDescontos";
 import TableDescontos from "../../components/tableDescontos";
 import App from "../../layout/app";
+import { settoken } from "../../helpers/token-helper";
 
 const ViewUsuario = () => {
   const { id } = useParams();
 
   const [usuario, setUsuario] = useState([]);
-
-  const token = localStorage.getItem("token");
-  const tokenPayload = JSON.parse(token);
-  const settoken = tokenPayload?.token;
 
   useEffect(() => {
     const fetchUsuario = async () => {
@@ -46,7 +43,7 @@ const ViewUsuario = () => {
       }
     };
     fetchUsuario();
-  }, [id, settoken]);
+  }, [id]);
 
   return (
     <App>

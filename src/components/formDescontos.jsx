@@ -9,12 +9,9 @@ import {
   Button,
 } from "react-bootstrap";
 import apiUrl from "../config";
+import { settoken } from "../helpers/token-helper";
 
 const FormDescontos = ({ id }) => {
-  const token = localStorage.getItem("token");
-  const tokenPayload = JSON.parse(token);
-  const settoken = tokenPayload?.token;
-
   const [formData, setFormData] = useState({
     relUser: id,
     descricao: "",

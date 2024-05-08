@@ -5,13 +5,10 @@ import "./style/style.css";
 import { BsEyeFill } from "react-icons/bs";
 import apiUrl from "../config";
 import Unidades from "./calculaUnidades";
+import { settoken } from "../helpers/token-helper";
 
 const TableObras = () => {
   const [obras, setObras] = useState([]);
-
-  const token = localStorage.getItem("token");
-  const tokenPayload = JSON.parse(token);
-  const settoken = tokenPayload?.token;
 
   useEffect(() => {
     const listaObras = async () => {
@@ -27,7 +24,7 @@ const TableObras = () => {
       }
     };
     listaObras();
-  }, [settoken]);
+  }, []);
 
   return (
     <Card>

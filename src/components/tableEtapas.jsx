@@ -2,20 +2,16 @@ import { Table, Card, CardHeader, CardBody, Button } from "react-bootstrap";
 import { useState, useEffect } from "react";
 import { BsPencilSquare, BsTrashFill } from "react-icons/bs";
 import axios from "axios";
-
 import "./style/style.css";
 import apiUrl from "../config";
 import Tempo from "./calculaTempo";
+import { settoken } from "../helpers/token-helper";
 
 const TableEtapas = ({ onSelecionarId }) => {
   const [etapas, setEtapas] = useState([]);
   const handleClick = (id) => {
     onSelecionarId(id);
   };
-
-  const token = localStorage.getItem("token");
-  const tokenPayload = JSON.parse(token);
-  const settoken = tokenPayload?.token;
 
   useEffect(() => {
     listaEtapas();

@@ -15,6 +15,7 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import apiUrl from "../config";
 import axios from "axios";
+import { settoken } from "../helpers/token-helper";
 
 const FormEditaObra = ({ id }) => {
   const [formData, setFormData] = useState({
@@ -26,10 +27,6 @@ const FormEditaObra = ({ id }) => {
     qtdApartamentos: "",
     descricaoObra: "",
   });
-
-  const token = localStorage.getItem("token");
-  const tokenPayload = JSON.parse(token);
-  const settoken = tokenPayload?.token;
 
   useEffect(() => {
     const pegaObra = async () => {
@@ -49,7 +46,7 @@ const FormEditaObra = ({ id }) => {
       });
     };
     pegaObra();
-  }, [id, settoken]);
+  }, [id]);
 
   const navigate = useNavigate();
 

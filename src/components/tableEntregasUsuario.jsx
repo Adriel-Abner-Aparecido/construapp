@@ -16,15 +16,12 @@ import {
 import { useState, useEffect } from "react";
 import axios from "axios";
 import apiUrl from "../config";
+import { settoken } from "../helpers/token-helper";
 
 const EntregasUsuarios = ({ id, items }) => {
   const [entregaServico, setEntregaServico] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = items === undefined ? 10 : items;
-
-  const token = localStorage.getItem("token");
-  const tokenPayload = JSON.parse(token);
-  const settoken = tokenPayload?.token;
 
   const handleClick = async (id, status) => {
     try {

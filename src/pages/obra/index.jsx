@@ -20,16 +20,13 @@ import ServicosPrestados from "../../components/tableServicosPrestados";
 import UnidadesObra from "../../components/unidadesObra";
 import ProgressObra from "../../components/progressObra";
 import App from "../../layout/app";
+import { settoken } from "../../helpers/token-helper";
 
 const ViewObra = () => {
   const { id } = useParams();
 
   const [obra, setObra] = useState([]);
   const [metaObra, setMetaObra] = useState([]);
-
-  const token = localStorage.getItem("token");
-  const tokenPayload = JSON.parse(token);
-  const settoken = tokenPayload?.token;
 
   useEffect(() => {
     const fetchObra = async () => {
@@ -46,7 +43,7 @@ const ViewObra = () => {
       }
     };
     fetchObra();
-  }, [id, settoken]);
+  }, [id]);
 
   return (
     <App>

@@ -14,6 +14,7 @@ import {
 import apiUrl from "../config";
 import axios from "axios";
 import "./style/style.css";
+import { settoken } from "../helpers/token-helper";
 
 const FormServicoPrestado = ({ refObra }) => {
   const [servicos, setServicos] = useState([]);
@@ -27,10 +28,6 @@ const FormServicoPrestado = ({ refObra }) => {
   const handleChange = (event) => {
     setFormData({ ...formData, [event.target.name]: event.target.value });
   };
-
-  const token = localStorage.getItem("token");
-  const tokenPayload = JSON.parse(token);
-  const settoken = tokenPayload?.token;
 
   const handleSubmit = async () => {
     try {

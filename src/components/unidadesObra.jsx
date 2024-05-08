@@ -3,13 +3,10 @@ import { useEffect, useState } from "react";
 import apiUrl from "../config";
 import { Table, Button } from "react-bootstrap";
 import { BsTrashFill } from "react-icons/bs";
+import { settoken } from "../helpers/token-helper";
 
 const UnidadesObra = ({ refObra }) => {
   const [numerosObra, setNumerosObra] = useState([]);
-
-  const token = localStorage.getItem("token");
-  const tokenPayload = JSON.parse(token);
-  const settoken = tokenPayload?.token;
 
   useEffect(() => {
     fetchUnidadesObra();

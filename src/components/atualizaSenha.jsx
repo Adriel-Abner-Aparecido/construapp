@@ -10,16 +10,13 @@ import {
 } from "react-bootstrap";
 import apiUrl from "../config";
 import axios from "axios";
+import { settoken } from "../helpers/token-helper";
 
 const AtualizaSenha = ({ id }) => {
   const [formData, setFormData] = useState({
     senhaUsuario: "",
     confirmaSenha: "",
   });
-
-  const token = localStorage.getItem("token");
-  const tokenPayload = JSON.parse(token);
-  const settoken = tokenPayload?.token;
 
   const handleChange = (event) => {
     setFormData({ ...formData, [event.target.name]: event.target.value });

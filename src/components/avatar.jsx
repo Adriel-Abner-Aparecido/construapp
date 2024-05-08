@@ -1,13 +1,10 @@
 import { useEffect, useState } from "react";
 import apiUrl from "../config";
 import axios from "axios";
+import { settoken } from "../helpers/token-helper";
 
 const Avatar = ({ id }) => {
   const [image, setImage] = useState("");
-
-  const token = localStorage.getItem("token");
-  const tokenPayload = JSON.parse(token);
-  const settoken = tokenPayload?.token;
 
   useEffect(() => {
     const PegaImagem = async () => {
@@ -24,7 +21,7 @@ const Avatar = ({ id }) => {
       }
     };
     PegaImagem();
-  }, [id, settoken]);
+  }, [id]);
 
   return (
     <img

@@ -11,6 +11,7 @@ import {
 } from "react-bootstrap";
 import { useState } from "react";
 import apiUrl from "../config";
+import { settoken } from "../helpers/token-helper";
 
 const FormUnidadesObra = ({ refObra }) => {
   const [formData, setFormData] = useState({
@@ -29,10 +30,6 @@ const FormUnidadesObra = ({ refObra }) => {
       ...formData,
       refObra: refObra,
     };
-
-    const token = localStorage.getItem("token");
-    const tokenPayload = JSON.parse(token);
-    const settoken = tokenPayload?.token;
 
     try {
       await fetch(`${apiUrl}/numerosObra/cadastroNumerosObra`, {

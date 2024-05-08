@@ -11,6 +11,7 @@ import {
 import { useEffect, useState } from "react";
 import axios from "axios";
 import apiUrl from "../config";
+import { settoken } from "../helpers/token-helper";
 
 const FormEtapas = () => {
   const [formData, setFormData] = useState({
@@ -18,10 +19,6 @@ const FormEtapas = () => {
     refEtapa: "",
     tempoExecucao: "",
   });
-
-  const token = localStorage.getItem("token");
-  const tokenPayload = JSON.parse(token);
-  const settoken = tokenPayload?.token;
 
   const handleChange = (event) => {
     setFormData({ ...formData, [event.target.name]: event.target.value });

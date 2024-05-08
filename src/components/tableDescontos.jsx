@@ -3,12 +3,9 @@ import { useEffect, useState } from "react";
 import apiUrl from "../config";
 import { Button, Card, CardBody, CardHeader, Table } from "react-bootstrap";
 import { BsPencilSquare, BsTrash } from "react-icons/bs";
+import { settoken } from "../helpers/token-helper";
 
 const TableDescontos = ({ id }) => {
-  const token = localStorage.getItem("token");
-  const tokenPayload = JSON.parse(token);
-  const settoken = tokenPayload?.token;
-
   const [descontos, setDescontos] = useState([]);
 
   useEffect(() => {

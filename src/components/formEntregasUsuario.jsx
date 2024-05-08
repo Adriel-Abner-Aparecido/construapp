@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import apiUrl from "../config";
 import { Form, FormSelect, FormControl, Button } from "react-bootstrap";
 import axios from "axios";
+import { settoken } from "../helpers/token-helper";
 
 const FormEntregasUsuario = ({ userId, atualiza }) => {
   const [obras, setObras] = useState([]);
@@ -20,10 +21,6 @@ const FormEntregasUsuario = ({ userId, atualiza }) => {
 
   const [percentual, setPercentual] = useState(0);
   const [somaTempo, setSomaTempo] = useState(0);
-
-  const token = localStorage.getItem("token");
-  const tokenPayload = JSON.parse(token);
-  const settoken = tokenPayload?.token;
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -55,7 +52,7 @@ const FormEntregasUsuario = ({ userId, atualiza }) => {
       })
       .then((response) => setObras(response.data.obras))
       .catch((error) => console.error(error));
-  }, [settoken]);
+  }, []);
 
   const handleSelectedObra = (obraId) => {
     setFormData({

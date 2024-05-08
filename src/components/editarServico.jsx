@@ -10,15 +10,12 @@ import {
 import { useEffect, useState } from "react";
 import axios from "axios";
 import apiUrl from "../config";
+import { settoken } from "../helpers/token-helper";
 
 const EditaServico = ({ id }) => {
   const [formData, setFormData] = useState({
     nomeServico: "",
   });
-
-  const token = localStorage.getItem("token");
-  const tokenPayload = JSON.parse(token);
-  const settoken = tokenPayload?.token;
 
   useEffect(() => {
     const listaServicos = async () => {
@@ -36,7 +33,7 @@ const EditaServico = ({ id }) => {
       }
     };
     listaServicos();
-  }, [id, settoken]);
+  }, [id]);
 
   const handleChange = (event) => {
     const { name, value } = event.target;

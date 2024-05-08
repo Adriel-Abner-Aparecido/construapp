@@ -3,15 +3,12 @@ import { ProgressBar } from "react-bootstrap";
 import apiUrl from "../config";
 import axios from "axios";
 import Counter from "./contador";
+import { settoken } from "../helpers/token-helper";
 
 const ProgressUsuarios = ({ id }) => {
   const [pegaMeta, setPegaMeta] = useState(0);
   const [valor, setValor] = useState(0);
   const [diasUteis, setDiasUteis] = useState(0);
-
-  const token = localStorage.getItem("token");
-  const tokenPayload = JSON.parse(token);
-  const settoken = tokenPayload?.token;
 
   //Define a meta por padrão usa Meta Global definida no CardMeta
   useEffect(() => {

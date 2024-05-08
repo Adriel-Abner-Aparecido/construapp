@@ -17,8 +17,10 @@ import apiUrl from "../../config";
 import FormEntregasUsuario from "../../components/formEntregasUsuario";
 import ProgressAreaUsuarios from "../../components/progressAreaUsuario";
 import Avatar from "../../components/avatar";
+import { id, userName, settoken } from "../../helpers/token-helper";
 
 const AreaUsuario = () => {
+  console.log(id, userName);
   const navigate = useNavigate();
 
   const handleLogout = () => {
@@ -26,18 +28,12 @@ const AreaUsuario = () => {
     return navigate("/login");
   };
 
-  const token = localStorage.getItem("token");
-  const tokenPayload = JSON.parse(token);
-  const userId = tokenPayload?.userId;
-  const userName = tokenPayload?.userName;
-  const settoken = tokenPayload?.token;
-
   const [entregaServico, setEntregaServico] = useState();
 
   const fetchServicos = async () => {
     try {
       const responseEntregaServico = await axios.get(
-        `${apiUrl}/entregas/entregaServicoUsuario/${userId}`,
+        `${apiUrl}/entregas/entregaServicoUsuario/${id}`,
         {
           headers: {
             Authorization: `Bearer ${settoken}`,
@@ -72,7 +68,7 @@ const AreaUsuario = () => {
           <Row>
             <Col className="d-flex justify-content-center">
               <a href="/configusuario">
-                <Avatar id={userId} />
+                <Avatar id={id} />
               </a>
             </Col>
           </Row>
@@ -95,7 +91,7 @@ const AreaUsuario = () => {
           className="p-0 m-0"
           style={{ background: "#E9ECEF", height: "5px" }}
         >
-          <ProgressAreaUsuarios id={userId} />
+          <ProgressAreaUsuarios id={id} />
         </div>
       </Row>
       <Row className="d-flex justify-content-center mb-5 mt-5 m-0">
@@ -103,7 +99,7 @@ const AreaUsuario = () => {
           <Card>
             <CardHeader className="text-center">A receber</CardHeader>
             <CardBody>
-              <ValorAreceber id={userId} />
+              <ValorAreceber id={id} />
             </CardBody>
           </Card>
         </Col>
@@ -113,7 +109,7 @@ const AreaUsuario = () => {
           <Card>
             <CardHeader className="text-center">Entregar</CardHeader>
             <CardBody>
-              <FormEntregasUsuario userId={userId} atualiza={fetchServicos} />
+              <FormEntregasUsuario userId={id} atualiza={fetchServicos} />
             </CardBody>
           </Card>
         </Col>

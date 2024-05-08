@@ -3,6 +3,7 @@ import { ProgressBar } from "react-bootstrap";
 import Counter from "./contador";
 import apiUrl from "../config";
 import axios from "axios";
+import { settoken } from "../helpers/token-helper";
 
 const ProgressObras = ({ id }) => {
   const [entregas, setEntregas] = useState(0);
@@ -11,10 +12,6 @@ const ProgressObras = ({ id }) => {
   const [numerosObra, setNumerosObra] = useState(0);
   const [valor, setValor] = useState(0);
   const [tempoObra, setTempoObra] = useState(0);
-
-  const token = localStorage.getItem("token");
-  const tokenPayload = JSON.parse(token);
-  const settoken = tokenPayload?.token;
 
   //Define a meta por padrão usa Meta Global definida no CardMeta
   useEffect(() => {
@@ -42,7 +39,7 @@ const ProgressObras = ({ id }) => {
       }
     };
     buscaMeta();
-  }, [id, settoken]);
+  }, [id]);
 
   //Calcula numero de Unidades da Obra
   useEffect(() => {
@@ -71,7 +68,7 @@ const ProgressObras = ({ id }) => {
       }
     };
     unidadesObra();
-  }, [id, settoken]);
+  }, [id]);
 
   //Calcula as entregas Feitas
   useEffect(() => {
@@ -127,7 +124,7 @@ const ProgressObras = ({ id }) => {
       }
     };
     pegaObra();
-  }, [id, settoken]);
+  }, [id]);
 
   useEffect(() => {
     const pegaServicosPrestados = async () => {
@@ -166,7 +163,7 @@ const ProgressObras = ({ id }) => {
       }
     };
     pegaServicosPrestados();
-  }, [id, settoken]);
+  }, [id]);
 
   const totalTempoObra = tempoObra * numerosObra;
   const meta = totalTempoObra !== 0 ? (entregas * 100) / totalTempoObra : 0;
@@ -174,6 +171,7 @@ const ProgressObras = ({ id }) => {
   const metaDiaria = (valor * 100) / calculaMetaDiaria;
   const hoje = new Date().getDate();
   const metahoje = (totalTempoObra / diasUteis) * hoje;
+  const faltaMeta = 100 - (valor * 100) / metahoje;
 
   return (
     <>
@@ -183,6 +181,12 @@ const ProgressObras = ({ id }) => {
           now={meta}
           variant={metahoje > entregas ? "danger" : "primary"}
           label={<Counter finalNumber={meta} />}
+        />
+        <ProgressBar
+          now={faltaMeta <= 0 ? 0 : faltaMeta}
+          variant="warning"
+          className="progress-bar-anim"
+          label={<Counter finalNumber={faltaMeta <= 0 ? 0 : faltaMeta} />}
         />
       </ProgressBar>
       <ProgressBar className="rounded-0 mb-2 progress-bar-anim">

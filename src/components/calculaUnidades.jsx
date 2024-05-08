@@ -1,14 +1,11 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import apiUrl from "../config";
+import { settoken } from "../helpers/token-helper";
 
 const Unidades = ({ id }) => {
   const [numerosObra, setNumerosObra] = useState([]);
   const [unidades, setUnidades] = useState(0);
-
-  const token = localStorage.getItem("token");
-  const tokenPayload = JSON.parse(token);
-  const settoken = tokenPayload?.token;
 
   useEffect(() => {
     const fetchUnidadesObra = async () => {
@@ -27,7 +24,7 @@ const Unidades = ({ id }) => {
       }
     };
     fetchUnidadesObra();
-  }, [id, settoken]);
+  }, [id]);
 
   useEffect(() => {
     const somaunidades = numerosObra.reduce((acc, numeros) => {

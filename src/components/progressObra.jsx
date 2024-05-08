@@ -3,16 +3,13 @@ import { ProgressBar } from "react-bootstrap";
 import Counter from "./contador";
 import apiUrl from "../config";
 import axios from "axios";
+import { settoken } from "../helpers/token-helper";
 
 const ProgressObra = ({ id }) => {
   const [entregas, setEntregas] = useState(0);
   const [numerosObra, setNumerosObra] = useState(0);
   const [tempoObra, setTempoObra] = useState(0);
   const [diasUteis, setDiasUteis] = useState(0);
-
-  const token = localStorage.getItem("token");
-  const tokenPayload = JSON.parse(token);
-  const settoken = tokenPayload?.token;
 
   //pegar dias Uteis
   useEffect(() => {
@@ -31,7 +28,7 @@ const ProgressObra = ({ id }) => {
       }
     };
     pegaMeta();
-  }, [id, settoken]);
+  }, [id]);
 
   //Calcula numero de Unidades da Obra
   useEffect(() => {
@@ -60,7 +57,7 @@ const ProgressObra = ({ id }) => {
       }
     };
     unidadesObra();
-  }, [id, settoken]);
+  }, [id]);
 
   //Calcula as entregas Feitas
   useEffect(() => {
@@ -103,7 +100,7 @@ const ProgressObra = ({ id }) => {
       }
     };
     pegaEntregas();
-  }, [id, settoken]);
+  }, [id]);
 
   useEffect(() => {
     const pegaServicosPrestados = async () => {
@@ -144,7 +141,7 @@ const ProgressObra = ({ id }) => {
       }
     };
     pegaServicosPrestados();
-  }, [id, settoken]);
+  }, [id]);
 
   const totalTempoObra = tempoObra * numerosObra;
   const meta = totalTempoObra !== 0 ? (entregas * 100) / totalTempoObra : 0;

@@ -14,6 +14,7 @@ import "./style/style.css";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import apiUrl from "../config";
+import { settoken } from "../helpers/token-helper";
 
 const FormObras = () => {
   const [formData, setFormData] = useState({
@@ -31,10 +32,6 @@ const FormObras = () => {
   const handleChange = (event) => {
     setFormData({ ...formData, [event.target.name]: event.target.value });
   };
-
-  const token = localStorage.getItem("token");
-  const tokenPayload = JSON.parse(token);
-  const settoken = tokenPayload?.token;
 
   const handleSubmit = async (event) => {
     event.preventDefault();

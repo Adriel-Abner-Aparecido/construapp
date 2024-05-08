@@ -12,6 +12,7 @@ import { useEffect, useState } from "react";
 import apiUrl from "../config";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { settoken } from "../helpers/token-helper";
 
 const FormEditaUsuarios = ({ id }) => {
   const [formData, setFormData] = useState({
@@ -31,10 +32,6 @@ const FormEditaUsuarios = ({ id }) => {
     setFormData({ ...formData, [event.target.name]: event.target.value });
   };
 
-  const token = localStorage.getItem("token");
-  const tokenPayload = JSON.parse(token);
-  const settoken = tokenPayload?.token;
-
   useEffect(() => {
     const pegaUsuario = async () => {
       const response = await axios.get(`${apiUrl}/usuarios/usuario/${id}`, {
@@ -52,7 +49,7 @@ const FormEditaUsuarios = ({ id }) => {
       });
     };
     pegaUsuario();
-  }, [id, settoken]);
+  }, [id]);
 
   const handleUpdate = async (event) => {
     event.preventDefault();

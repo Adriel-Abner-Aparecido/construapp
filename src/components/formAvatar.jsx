@@ -10,6 +10,7 @@ import {
 import { useState } from "react";
 import axios from "axios";
 import apiUrl from "../config";
+import { settoken } from "../helpers/token-helper";
 
 const FormAvatar = ({ id }) => {
   const [selectedFile, setSelectedFile] = useState(null);
@@ -32,10 +33,6 @@ const FormAvatar = ({ id }) => {
     const formData = new FormData();
     formData.append("file", selectedFile);
     formData.append("userId", id);
-
-    const token = localStorage.getItem("token");
-    const tokenPayload = JSON.parse(token);
-    const settoken = tokenPayload?.token;
 
     try {
       await axios.post(`${apiUrl}/avatar/avatar`, formData, {

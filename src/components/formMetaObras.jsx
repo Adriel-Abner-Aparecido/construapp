@@ -2,16 +2,13 @@ import React, { useState, useEffect } from "react";
 import { Col, Form, FormControl, FormLabel, Button } from "react-bootstrap";
 import axios from "axios";
 import apiUrl from "../config";
+import { settoken } from "../helpers/token-helper";
 
 const FormMetaObras = ({ id }) => {
   const [formData, setFormData] = useState({
     relObra: id,
     valorMeta: "",
   });
-
-  const token = localStorage.getItem("token");
-  const tokenPayload = JSON.parse(token);
-  const settoken = tokenPayload?.token;
 
   const handleSubmit = async () => {
     try {

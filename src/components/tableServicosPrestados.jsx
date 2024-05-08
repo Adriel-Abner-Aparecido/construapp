@@ -3,13 +3,10 @@ import { useEffect, useState } from "react";
 import { Button, Card, CardBody, CardHeader, Table } from "react-bootstrap";
 import apiUrl from "../config";
 import { BsTrashFill } from "react-icons/bs";
+import { settoken } from "../helpers/token-helper";
 
 const ServicosPrestados = ({ refObra }) => {
   const [servicoPrestado, getServicoPrestado] = useState([]);
-
-  const token = localStorage.getItem("token");
-  const tokenPayload = JSON.parse(token);
-  const settoken = tokenPayload?.token;
 
   let deleteInProgress = false;
 

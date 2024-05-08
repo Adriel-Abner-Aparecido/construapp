@@ -5,12 +5,9 @@ import FormEditaUsuarios from "../../components/formEditaUsuarios";
 import FormAvatar from "../../components/formAvatar";
 import AtualizaSenha from "../../components/atualizaSenha";
 import App from "../../layout/app";
+import { id } from "../../helpers/token-helper";
 
 const ConfigPage = () => {
-  const token = localStorage.getItem("token");
-  const tokenPayload = JSON.parse(token);
-  const id = tokenPayload?.userId;
-
   return (
     <App>
       <Row className="px-5 mb-5">

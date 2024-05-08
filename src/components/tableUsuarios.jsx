@@ -5,6 +5,7 @@ import axios from "axios";
 import { BsEyeFill } from "react-icons/bs";
 import apiUrl from "../config";
 import ProgressUsuarios from "./progressUsuarios";
+import { settoken } from "../helpers/token-helper";
 
 const TableUsuarios = () => {
   const [users, setUsers] = useState([]);
@@ -13,10 +14,6 @@ const TableUsuarios = () => {
     listaUsers();
     // eslint-disable-next-line
   }, []);
-
-  const token = localStorage.getItem("token");
-  const tokenPayload = JSON.parse(token);
-  const settoken = tokenPayload?.token;
 
   const listaUsers = async () => {
     try {

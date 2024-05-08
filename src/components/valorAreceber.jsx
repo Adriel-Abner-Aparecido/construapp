@@ -2,15 +2,12 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import apiUrl from "../config";
 import { Col, Row } from "react-bootstrap";
+import { settoken } from "../helpers/token-helper";
 
 const ValorAreceber = ({ id }) => {
   const [areceber, setAreceber] = useState(0);
   const [descontos, setDescontos] = useState([]);
   const [descontosCalculados, setDescontosCalculados] = useState(0);
-
-  const token = localStorage.getItem("token");
-  const tokenPayload = JSON.parse(token);
-  const settoken = tokenPayload?.token;
 
   useEffect(() => {
     const fetchServicos = async () => {
@@ -55,7 +52,7 @@ const ValorAreceber = ({ id }) => {
       }
     };
     pegaDescontos();
-  }, [id, settoken]);
+  }, [id]);
 
   useEffect(() => {
     const calculaDescontos = descontos.reduce((acc, desconto) => {

@@ -10,6 +10,7 @@ import {
 } from "react-bootstrap";
 import { useState } from "react";
 import apiUrl from "../config";
+import { settoken } from "../helpers/token-helper";
 
 const FormUsuarios = () => {
   const [formData, setFormData] = useState({
@@ -27,10 +28,6 @@ const FormUsuarios = () => {
   const handleChange = (event) => {
     setFormData({ ...formData, [event.target.name]: event.target.value });
   };
-
-  const token = localStorage.getItem("token");
-  const tokenPayload = JSON.parse(token);
-  const settoken = tokenPayload?.token;
 
   const handleSubmit = async (event) => {
     event.preventDefault();

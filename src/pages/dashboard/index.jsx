@@ -15,18 +15,18 @@ import App from "../../layout/app";
 const DashboardPage = () => {
   return (
     <App>
-      <Row className="px-4 m-0">
-        <Col sm={12} md={4} xxl={4}>
+      <Row className="px-0 p-md-3 m-md-0">
+        <Col sm={12} md={4} xxl={4} className="p-0 p-xxl-4 p-md-3">
           <CardProgress />
         </Col>
-        <Col sm={12} md={4} xxl={4}>
+        <Col sm={12} md={4} xxl={4} className="p-0 p-xxl-4 p-md-3">
           <CardMeta />
         </Col>
-        <Col sm={12} md={4} xxl={4}>
+        <Col sm={12} md={4} xxl={4} className="p-0 p-xxl-4 p-md-3">
           <CardTotal />
         </Col>
       </Row>
-      <Row className="px-5">
+      <Row className="px-0 p-md-5">
         <Col xl={12} className="pt-5 p-0">
           <TableObras />
         </Col>

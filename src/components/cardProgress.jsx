@@ -3,13 +3,10 @@ import ProgressObras from "./progressObras";
 import { useEffect, useState } from "react";
 import apiUrl from "../config";
 import axios from "axios";
+import { settoken } from "../helpers/token-helper";
 
 const CardProgress = () => {
   const [obras, setObras] = useState([]);
-
-  const token = localStorage.getItem("token");
-  const tokenPayload = JSON.parse(token);
-  const settoken = tokenPayload?.token;
 
   useEffect(() => {
     const pegaObras = async () => {
@@ -25,7 +22,6 @@ const CardProgress = () => {
       }
     };
     pegaObras();
-    // eslint-disable-next-line
   }, []);
 
   return (

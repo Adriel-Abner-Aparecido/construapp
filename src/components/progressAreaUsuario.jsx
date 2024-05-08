@@ -2,15 +2,12 @@ import { useEffect, useState } from "react";
 import { ProgressBar } from "react-bootstrap";
 import apiUrl from "../config";
 import axios from "axios";
+import { settoken } from "../helpers/token-helper";
 
 const ProgressAreaUsuarios = ({ id }) => {
   const [pegaMeta, setPegaMeta] = useState([]);
   const [valor, setValor] = useState(0);
   const [diasUteis, setDiasUteis] = useState(0);
-
-  const token = localStorage.getItem("token");
-  const tokenPayload = JSON.parse(token);
-  const settoken = tokenPayload?.token;
 
   //Define a meta por padrão usa Meta Global definida no CardMeta
   useEffect(() => {
@@ -36,7 +33,7 @@ const ProgressAreaUsuarios = ({ id }) => {
       }
     };
     buscaMeta();
-  }, [id, settoken]);
+  }, [id]);
 
   //Calcula as entregas Feitas
   useEffect(() => {
@@ -73,7 +70,7 @@ const ProgressAreaUsuarios = ({ id }) => {
       }
     };
     pegaObra();
-  }, [id, settoken]);
+  }, [id]);
 
   const metaMensal = (valor * 100) / pegaMeta;
   const metaDiaria = pegaMeta / diasUteis;

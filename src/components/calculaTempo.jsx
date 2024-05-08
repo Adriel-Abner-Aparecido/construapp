@@ -1,15 +1,12 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import apiUrl from "../config";
+import { settoken } from "../helpers/token-helper";
 
 const Tempo = ({ id, porcentagem, index }) => {
   const [tempo, setTempo] = useState([]);
   const [somaTempo, setSomaTempo] = useState(0);
   const [percentual, setPercentual] = useState(0);
-
-  const token = localStorage.getItem("token");
-  const tokenPayload = JSON.parse(token);
-  const settoken = tokenPayload?.token;
 
   useEffect(() => {
     const fetchTempo = async () => {
@@ -36,7 +33,7 @@ const Tempo = ({ id, porcentagem, index }) => {
       }
     };
     fetchTempo();
-  }, [id, index, settoken]);
+  }, [id, index]);
 
   useEffect(() => {
     if (porcentagem === true) {

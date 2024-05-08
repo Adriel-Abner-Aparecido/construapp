@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import apiUrl from "../config";
+import { settoken } from "../helpers/token-helper";
 
 const CalculaTotalProduzido = () => {
   // const currentDate = new Date();
@@ -9,10 +10,6 @@ const CalculaTotalProduzido = () => {
   // const [data, setData] = useState(currentMounth);
 
   const [valor, setValor] = useState(0);
-
-  const token = localStorage.getItem("token");
-  const tokenPayload = JSON.parse(token);
-  const settoken = tokenPayload?.token;
 
   useEffect(() => {
     const pagaEntregas = async () => {
@@ -46,7 +43,7 @@ const CalculaTotalProduzido = () => {
     };
 
     pagaEntregas();
-  }, [settoken]);
+  }, []);
 
   return <>{valor}</>;
 };

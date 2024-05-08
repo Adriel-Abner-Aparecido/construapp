@@ -3,6 +3,8 @@ import axios from "axios";
 import apiUrl from "../config";
 import Counter from "./contador";
 import { ProgressBar } from "react-bootstrap";
+import { settoken } from "../helpers/token-helper";
+import { hoje, mes, ano } from "../helpers/dates-helper";
 
 const Progress = () => {
   const [meta, setMeta] = useState(0);
@@ -11,10 +13,6 @@ const Progress = () => {
   const [valor, setValor] = useState(0);
   const [tempoServico, setTempoServico] = useState(0);
   const [valorServico, setValorServico] = useState(0);
-
-  const token = localStorage.getItem("token");
-  const tokenPayload = JSON.parse(token);
-  const settoken = tokenPayload?.token;
 
   useEffect(() => {
     const pegaMeta = async () => {
@@ -31,7 +29,7 @@ const Progress = () => {
       }
     };
     pegaMeta();
-  }, [settoken]);
+  }, []);
 
   useEffect(() => {
     const pagaEntregas = async () => {
@@ -42,11 +40,11 @@ const Progress = () => {
           },
         });
         const entregasData = response.data.entregaServico;
-        const today = new Date().getDate();
 
         if (entregasData.length > 0) {
           const soma = entregasData.reduce((acc, entrega) => {
-            if (entrega.statusEntrega === "aceito") {
+            const esteMes = new Date(entrega.createdAt).getMonth() + 1;
+            if (entrega.statusEntrega === "aceito" && esteMes === mes) {
               return (
                 acc +
                 entrega.servicoObra.valoraReceber * (entrega.percentual / 100)
@@ -60,8 +58,16 @@ const Progress = () => {
 
         if (entregasData.length > 0) {
           const soma = entregasData.reduce((acc, entrega) => {
-            const entregaDay = new Date(entrega.createdAt).getDate();
-            if (entrega.statusEntrega === "aceito" && entregaDay === today) {
+            const esteDia = new Date(entrega.createdAt).getDate();
+            const esteMes = new Date(entrega.createdAt).getMonth() + 1;
+            const esteAno = new Date(entrega.createdAt).getFullYear();
+
+            if (
+              entrega.statusEntrega === "aceito" &&
+              esteDia === hoje &&
+              esteMes === mes &&
+              esteAno === ano
+            ) {
               return (
                 acc +
                 entrega.servicoObra.valoraReceber * (entrega.percentual / 100)
@@ -77,7 +83,7 @@ const Progress = () => {
     };
 
     pagaEntregas();
-  }, [settoken]);
+  }, []);
 
   useEffect(() => {
     const pegaServicosPrestados = async () => {
@@ -121,12 +127,11 @@ const Progress = () => {
       }
     };
     pegaServicosPrestados();
-  }, [settoken]);
+  }, []);
 
   const metaGeral = (valor * 100) / meta;
   const metaDiaria = meta / diasUteis;
   const diaria = (metaDia * 100) / metaDiaria;
-  const hoje = new Date().getDate();
   const metaHoje = metaDiaria * hoje;
   const faltaMeta = 100 - (valor * 100) / metaHoje;
 
@@ -143,10 +148,10 @@ const Progress = () => {
           label={<Counter finalNumber={metaGeral} />}
         />
         <ProgressBar
-          now={faltaMeta}
+          now={faltaMeta <= 0 ? 0 : faltaMeta}
           variant="warning"
           className="progress-bar-anim"
-          label={<Counter finalNumber={faltaMeta} />}
+          label={<Counter finalNumber={faltaMeta <= 0 ? 0 : faltaMeta} />}
         />
       </ProgressBar>
       <ProgressBar className="progress-30 rounded-0">
